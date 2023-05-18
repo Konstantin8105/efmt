@@ -10,6 +10,7 @@ const (
 	size     = 6
 )
 
+// Sprintf convert `float64` in engineer format
 func Sprint(v float64) string {
 	exp := math.Log10(math.Abs(v))
 	fl := int(math.Floor(exp))
