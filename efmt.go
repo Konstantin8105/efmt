@@ -6,7 +6,7 @@ import (
 )
 
 const (
-	exponent = 4
+	exponent = 3
 	size     = 6
 )
 
@@ -19,17 +19,17 @@ func Sprint(v float64) string {
 	var format string
 	if fl < 0 {
 		fl -= 3
-		format = fmt.Sprintf("%%%d.%df%%+0%dd", size-1-ost, size-4-ost, exponent)
+		format = fmt.Sprintf("%%%d.%dfe%%+0%dd", size-1-ost, size-4-ost, exponent)
 	} else if fl == 0 {
 		if ost < 0 {
 			fl -= 3
-			format = fmt.Sprintf("%%%d.%df%%+0%dd", size-1-ost, size-4-ost, exponent)
+			format = fmt.Sprintf("%%%d.%dfe%%+0%dd", size-1-ost, size-4-ost, exponent)
 		} else {
 			format = fmt.Sprintf("%%.%df", size-1-ost)
 			return fmt.Sprintf(format, v)
 		}
 	} else {
-		format = fmt.Sprintf("%%.%df%%+0%dd", size-1-ost, exponent)
+		format = fmt.Sprintf("%%.%dfe%%+0%dd", size-1-ost, exponent)
 	}
 	v = v / math.Pow(10, float64(fl))
 	return fmt.Sprintf(format, v, fl)
