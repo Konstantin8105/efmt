@@ -21,7 +21,7 @@ func Test(t *testing.T) {
 	var buf bytes.Buffer
 	for i, v := range vs {
 		s := efmt.Sprint(v)
-		fmt.Fprintf(&buf, "%20s %20e\n", s, vs[i])
+		fmt.Fprintf(&buf, "%20s %20e %20f\n", s, vs[i], vs[i])
 	}
 	compare.Test(t, ".fts", buf.Bytes())
 }
