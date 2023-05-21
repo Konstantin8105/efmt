@@ -16,6 +16,7 @@ func Test(t *testing.T) {
 		vs = append(vs, 1.234567890*math.Pow(10, float64(i)))
 		vs = append(vs, -vs[len(vs)-1])
 	}
+	vs = append(vs, 0.0)
 	const exponent = 4
 	const size = 6
 	var buf bytes.Buffer

@@ -12,6 +12,9 @@ const (
 
 // Sprintf convert `float64` in engineer format
 func Sprint(v float64) string {
+	if v == 0.0 {
+		return "0.00000"
+	}
 	exp := math.Log10(math.Abs(v))
 	fl := int(math.Floor(exp))
 	ost := fl % 3
