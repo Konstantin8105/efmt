@@ -11,12 +11,15 @@ import (
 )
 
 func Test(t *testing.T) {
+	value := 1.234567890
 	var vs []float64
 	for i := -12; i < 12; i++ {
-		vs = append(vs, 1.234567890*math.Pow(10, float64(i)))
+		if i == 0 {
+			vs = append(vs, 0.0)
+		}
+		vs = append(vs, value*math.Pow(10, float64(i)))
 		vs = append(vs, -vs[len(vs)-1])
 	}
-	vs = append(vs, 0.0)
 	const exponent = 4
 	const size = 6
 	var buf bytes.Buffer
@@ -32,8 +35,58 @@ func Test(t *testing.T) {
 // Benchmark/+002-4         	 1626250	       733.1 ns/op	      40 B/op	       3 allocs/op
 // Benchmark/+011-4         	 1539116	       754.9 ns/op	      40 B/op	       3 allocs/op
 // Benchmark/fmt.Sprintf-4  	 4528094	       265.0 ns/op	      32 B/op	       2 allocs/op
+// cpu: Intel(R) Xeon(R) CPU           X5550  @ 2.67GHz
+// Benchmark/-011-16         	 1000000	      1153 ns/op	      48 B/op	       4 allocs/op
+// Benchmark/-010-16         	 1000000	      1118 ns/op	      48 B/op	       4 allocs/op
+// Benchmark/-009-16         	 1000000	      1097 ns/op	      48 B/op	       4 allocs/op
+// Benchmark/-008-16         	 1000000	      1115 ns/op	      48 B/op	       4 allocs/op
+// Benchmark/-007-16         	 1000000	      1094 ns/op	      48 B/op	       4 allocs/op
+// Benchmark/-006-16         	 1000000	      1069 ns/op	      48 B/op	       4 allocs/op
+// Benchmark/-005-16         	 1000000	      1114 ns/op	      48 B/op	       4 allocs/op
+// Benchmark/-004-16         	  996427	      1138 ns/op	      48 B/op	       4 allocs/op
+// Benchmark/-003-16         	 1000000	      1078 ns/op	      48 B/op	       4 allocs/op
+// Benchmark/-002-16         	 1000000	      1080 ns/op	      48 B/op	       4 allocs/op
+// Benchmark/-001-16         	 1000000	      1145 ns/op	      48 B/op	       4 allocs/op
+// Benchmark/+000-16         	 1559452	       736.5 ns/op	      24 B/op	       3 allocs/op
+// Benchmark/+001-16         	 1664338	       724.3 ns/op	      24 B/op	       3 allocs/op
+// Benchmark/+002-16         	 1704063	       727.6 ns/op	      24 B/op	       3 allocs/op
+// Benchmark/+003-16         	 1000000	      1019 ns/op	      40 B/op	       3 allocs/op
+// Benchmark/+004-16         	 1000000	      1006 ns/op	      40 B/op	       3 allocs/op
+// Benchmark/+005-16         	 1000000	      1013 ns/op	      40 B/op	       3 allocs/op
+// Benchmark/+006-16         	 1000000	      1015 ns/op	      40 B/op	       3 allocs/op
+// Benchmark/+007-16         	 1000000	      1037 ns/op	      40 B/op	       3 allocs/op
+// Benchmark/+008-16         	 1000000	      1077 ns/op	      40 B/op	       3 allocs/op
+// Benchmark/+009-16         	 1164051	      1022 ns/op	      40 B/op	       3 allocs/op
+// Benchmark/+010-16         	 1000000	      1026 ns/op	      40 B/op	       3 allocs/op
+// Benchmark/+011-16         	 1000000	      1016 ns/op	      40 B/op	       3 allocs/op
+// Benchmark/fmt.Sprintf-16  	 3964371	       302.5 ns/op	      32 B/op	       2 allocs/op
+//
+// Benchmark/-011-16         	  918274	      1185 ns/op	      48 B/op	       4 allocs/op
+// Benchmark/-010-16         	 1000000	      1167 ns/op	      48 B/op	       4 allocs/op
+// Benchmark/-009-16         	 1000000	      1184 ns/op	      48 B/op	       4 allocs/op
+// Benchmark/-008-16         	 1000000	      1171 ns/op	      48 B/op	       4 allocs/op
+// Benchmark/-007-16         	 1000000	      1144 ns/op	      48 B/op	       4 allocs/op
+// Benchmark/-006-16         	 1000000	      1136 ns/op	      48 B/op	       4 allocs/op
+// Benchmark/-005-16         	 1000000	      1153 ns/op	      48 B/op	       4 allocs/op
+// Benchmark/-004-16         	 1000000	      1126 ns/op	      48 B/op	       4 allocs/op
+// Benchmark/-003-16         	 1000000	      1113 ns/op	      48 B/op	       4 allocs/op
+// Benchmark/-002-16         	 1000000	      1155 ns/op	      48 B/op	       4 allocs/op
+// Benchmark/-001-16         	 1749850	       685.4 ns/op	      24 B/op	       3 allocs/op
+// Benchmark/+000-16         	 1737892	       709.0 ns/op	      24 B/op	       3 allocs/op
+// Benchmark/+001-16         	 1652661	       691.5 ns/op	      24 B/op	       3 allocs/op
+// Benchmark/+002-16         	 1781551	       697.7 ns/op	      24 B/op	       3 allocs/op
+// Benchmark/+003-16         	 1755388	       671.0 ns/op	      24 B/op	       3 allocs/op
+// Benchmark/+004-16         	 1830135	       648.3 ns/op	      24 B/op	       3 allocs/op
+// Benchmark/+005-16         	 1000000	      1043 ns/op	      40 B/op	       3 allocs/op
+// Benchmark/+006-16         	 1000000	      1119 ns/op	      40 B/op	       3 allocs/op
+// Benchmark/+007-16         	 1000000	      1115 ns/op	      40 B/op	       3 allocs/op
+// Benchmark/+008-16         	 1000000	      1104 ns/op	      40 B/op	       3 allocs/op
+// Benchmark/+009-16         	 1000000	      1148 ns/op	      40 B/op	       3 allocs/op
+// Benchmark/+010-16         	 1000000	      1059 ns/op	      40 B/op	       3 allocs/op
+// Benchmark/+011-16         	  973624	      1082 ns/op	      40 B/op	       3 allocs/op
+// Benchmark/fmt.Sprintf-16  	 3304615	       325.6 ns/op	      32 B/op	       2 allocs/op
 func Benchmark(b *testing.B) {
-	for _, exp := range []int{-11, 2, 11} {
+	for exp := -11; exp <= 11; exp++ {
 		b.Run(fmt.Sprintf("%+04d", exp), func(b *testing.B) {
 			value := 1.234567890 * math.Pow(10, float64(exp))
 			b.ResetTimer()

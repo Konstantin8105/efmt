@@ -12,8 +12,29 @@ const (
 
 // Sprintf convert `float64` in engineer format
 func Sprint(v float64) string {
+	av := math.Abs(v)
 	if v == 0.0 {
 		return "0.00000"
+	}
+	switch {
+	case 0.1 <= av && av < 1.0:
+		format := fmt.Sprintf("%%.%df", size-1)
+		return fmt.Sprintf(format, v)
+	case 1.0 <= av && av < 10.0:
+		format := fmt.Sprintf("%%.%df", size-1)
+		return fmt.Sprintf(format, v)
+	case 10.0 <= av && av < 100.0:
+		format := fmt.Sprintf("%%.%df", size-2)
+		return fmt.Sprintf(format, v)
+	case 100.0 <= av && av < 1000.0:
+		format := fmt.Sprintf("%%.%df", size-3)
+		return fmt.Sprintf(format, v)
+	case 1000.0 <= av && av < 10000.0:
+		format := fmt.Sprintf("%%.%df", size-4)
+		return fmt.Sprintf(format, v)
+	case 10000.0 <= av && av < 100000.0:
+		format := fmt.Sprintf("%%.%df", size-5)
+		return fmt.Sprintf(format, v)
 	}
 	exp := math.Log10(math.Abs(v))
 	fl := int(math.Floor(exp))
