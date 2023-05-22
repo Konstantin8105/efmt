@@ -35,6 +35,32 @@ func Test(t *testing.T) {
 // Benchmark/+002-4         	 1626250	       733.1 ns/op	      40 B/op	       3 allocs/op
 // Benchmark/+011-4         	 1539116	       754.9 ns/op	      40 B/op	       3 allocs/op
 // Benchmark/fmt.Sprintf-4  	 4528094	       265.0 ns/op	      32 B/op	       2 allocs/op
+//
+// Benchmark/-011-4         	 1307503	       913.0 ns/op	      48 B/op	       4 allocs/op
+// Benchmark/-010-4         	 1336034	       899.8 ns/op	      48 B/op	       4 allocs/op
+// Benchmark/-009-4         	 1329030	       899.5 ns/op	      48 B/op	       4 allocs/op
+// Benchmark/-008-4         	 1304426	       909.1 ns/op	      48 B/op	       4 allocs/op
+// Benchmark/-007-4         	 1294702	       915.4 ns/op	      48 B/op	       4 allocs/op
+// Benchmark/-006-4         	 1330118	       946.5 ns/op	      48 B/op	       4 allocs/op
+// Benchmark/-005-4         	 1250877	       970.9 ns/op	      48 B/op	       4 allocs/op
+// Benchmark/-004-4         	 1264894	       971.3 ns/op	      48 B/op	       4 allocs/op
+// Benchmark/-003-4         	 1255070	       909.2 ns/op	      48 B/op	       4 allocs/op
+// Benchmark/-002-4         	 1282087	       936.8 ns/op	      48 B/op	       4 allocs/op
+// Benchmark/-001-4         	 2033076	       559.2 ns/op	      24 B/op	       3 allocs/op
+// Benchmark/+000-4         	 2140952	       545.7 ns/op	      24 B/op	       3 allocs/op
+// Benchmark/+001-4         	 2161412	       542.6 ns/op	      24 B/op	       3 allocs/op
+// Benchmark/+002-4         	 2157922	       547.7 ns/op	      24 B/op	       3 allocs/op
+// Benchmark/+003-4         	 2227048	       535.1 ns/op	      24 B/op	       3 allocs/op
+// Benchmark/+004-4         	 2241903	       523.9 ns/op	      24 B/op	       3 allocs/op
+// Benchmark/+005-4         	 2152898	       575.6 ns/op	      32 B/op	       3 allocs/op
+// Benchmark/+006-4         	 1317602	       866.2 ns/op	      40 B/op	       3 allocs/op
+// Benchmark/+007-4         	 1403604	       839.2 ns/op	      40 B/op	       3 allocs/op
+// Benchmark/+008-4         	 1410225	       863.8 ns/op	      40 B/op	       3 allocs/op
+// Benchmark/+009-4         	 1286062	       855.4 ns/op	      40 B/op	       3 allocs/op
+// Benchmark/+010-4         	 1439583	       825.4 ns/op	      40 B/op	       3 allocs/op
+// Benchmark/+011-4         	 1461277	       828.6 ns/op	      40 B/op	       3 allocs/op
+// Benchmark/fmt.Sprintf-4  	 4527307	       262.3 ns/op	      32 B/op	       2 allocs/op
+//
 // cpu: Intel(R) Xeon(R) CPU           X5550  @ 2.67GHz
 // Benchmark/-011-16         	 1000000	      1153 ns/op	      48 B/op	       4 allocs/op
 // Benchmark/-010-16         	 1000000	      1118 ns/op	      48 B/op	       4 allocs/op
@@ -85,6 +111,7 @@ func Test(t *testing.T) {
 // Benchmark/+010-16         	 1000000	      1059 ns/op	      40 B/op	       3 allocs/op
 // Benchmark/+011-16         	  973624	      1082 ns/op	      40 B/op	       3 allocs/op
 // Benchmark/fmt.Sprintf-16  	 3304615	       325.6 ns/op	      32 B/op	       2 allocs/op
+//
 func Benchmark(b *testing.B) {
 	for exp := -11; exp <= 11; exp++ {
 		b.Run(fmt.Sprintf("%+04d", exp), func(b *testing.B) {

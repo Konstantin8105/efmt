@@ -35,6 +35,9 @@ func Sprint(v float64) string {
 	case 10000.0 <= av && av < 100000.0:
 		format := fmt.Sprintf("%%.%df", size-5)
 		return fmt.Sprintf(format, v)
+	case 100000.0 <= av && av < 1000000.0:
+		format := fmt.Sprintf("%%%d.f.", size)
+		return fmt.Sprintf(format, v)
 	}
 	exp := math.Log10(math.Abs(v))
 	fl := int(math.Floor(exp))
@@ -42,8 +45,12 @@ func Sprint(v float64) string {
 	fl = fl - ost
 	var format string
 	if fl < 0 {
-		fl -= 3
-		format = fmt.Sprintf("%%%d.%dfe%%+0%dd", size-1-ost, size-4-ost, exponent)
+		if ost == 0 {
+			format = fmt.Sprintf("%%%d.%dfe%%+0%dd", size-1+ost, size-1-ost, exponent)
+		} else {
+			fl -= 3
+			format = fmt.Sprintf("%%%d.%dfe%%+0%dd", size-1+ost, size-4-ost, exponent)
+		}
 	} else if fl == 0 {
 		if ost < 0 {
 			fl -= 3
