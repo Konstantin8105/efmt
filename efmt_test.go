@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"fmt"
 	"math"
+	"strings"
 	"testing"
 
 	"github.com/Konstantin8105/compare"
@@ -26,6 +27,18 @@ func Test(t *testing.T) {
 	for i, v := range vs {
 		s := efmt.Sprint(v)
 		fmt.Fprintf(&buf, "%20s %20e %20f\n", s, vs[i], vs[i])
+		t.Run(s, func(t *testing.T) {
+			index := strings.Index(s, "e")
+			if 0 <= index {
+				s = s[:index]
+			}
+			s = strings.ReplaceAll(s, "+", "")
+			s = strings.ReplaceAll(s, "-", "")
+			s = strings.ReplaceAll(s, ".", "")
+			if 6 < len(s) {
+				t.Errorf("not valid lenght of number: `%s`", s)
+			}
+		})
 	}
 	compare.Test(t, ".fts", buf.Bytes())
 }
@@ -111,7 +124,6 @@ func Test(t *testing.T) {
 // Benchmark/+010-16         	 1000000	      1059 ns/op	      40 B/op	       3 allocs/op
 // Benchmark/+011-16         	  973624	      1082 ns/op	      40 B/op	       3 allocs/op
 // Benchmark/fmt.Sprintf-16  	 3304615	       325.6 ns/op	      32 B/op	       2 allocs/op
-//
 func Benchmark(b *testing.B) {
 	for exp := -11; exp <= 11; exp++ {
 		b.Run(fmt.Sprintf("%+04d", exp), func(b *testing.B) {
