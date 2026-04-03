@@ -21,8 +21,6 @@ func Test(t *testing.T) {
 		vs = append(vs, value*math.Pow(10, float64(i)))
 		vs = append(vs, -vs[len(vs)-1])
 	}
-	const exponent = 4
-	const size = 6
 	var buf bytes.Buffer
 	for i, v := range vs {
 		s := efmt.Sprint(v)
